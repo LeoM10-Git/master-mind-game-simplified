@@ -102,7 +102,7 @@ public class Game extends JFrame {
         selection.add("color");
         selection.add("color");
 
-        System.out.println(secret);
+//        System.out.println(secret);
 
         // --------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -112,7 +112,7 @@ public class Game extends JFrame {
                 if (e.getSource()==comboBox1){
                     comboBox1Selection = comboBox1.getSelectedItem().toString().toLowerCase();
                     selection.set(0, comboBox1Selection);
-                    System.out.println(comboBox1Selection);
+//                    System.out.println(comboBox1Selection);
                 }
             }
         });
@@ -122,7 +122,7 @@ public class Game extends JFrame {
                 if (e.getSource()==comboBox2){
                     comboBox2Selection = comboBox2.getSelectedItem().toString().toLowerCase();
                     selection.set(1, comboBox2Selection);
-                    System.out.println(comboBox2Selection);
+//                    System.out.println(comboBox2Selection);
                 }
             }
         });
@@ -132,7 +132,7 @@ public class Game extends JFrame {
                 if (e.getSource()==comboBox3){
                     comboBox3Selection = comboBox3.getSelectedItem().toString().toLowerCase();
                     selection.set(2, comboBox3Selection);
-                    System.out.println(comboBox3Selection);
+//                    System.out.println(comboBox3Selection);
                 }
             }
         });
@@ -142,7 +142,7 @@ public class Game extends JFrame {
                 if (e.getSource()==comboBox4){
                     comboBox4Selection = comboBox4.getSelectedItem().toString().toLowerCase();
                     selection.set(3, comboBox4Selection);
-                    System.out.println(comboBox4Selection);
+//                    System.out.println(comboBox4Selection);
                 }
             }
         });
@@ -227,7 +227,7 @@ public class Game extends JFrame {
                     }
                     black = 0;
                     white = 0;
-                    System.out.println(count);
+//                    System.out.println(count);
                 }
             });
         }
@@ -238,7 +238,4 @@ public class Game extends JFrame {
 
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
 }
