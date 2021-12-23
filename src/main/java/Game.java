@@ -62,7 +62,7 @@ public class Game extends JFrame {
     private JTextField textField8;
     private JTextField textField9;
     private JTextField textField10;
-    private JLabel chances;
+    private JTextField chances;
 
     private int count = 0;
     private static int black = 0;
@@ -147,6 +147,7 @@ public class Game extends JFrame {
             }
         });
 
+            chances.setText("Chances left: " + (10-count));
             checkButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -169,75 +170,63 @@ public class Game extends JFrame {
                                 textField1_1.setText(comboBox1Selection);textField2_1.setText(comboBox2Selection);
                                 textField3_1.setText(comboBox3Selection);textField4_1.setText(comboBox4Selection);
                                 textField1.setText(String.format("Black-%d \nWhite-%d", black, white));
-                                black = 0;
-                                white = 0;
                                 break;
                         case 1 : textField1_2.setVisible(true);textField2_2.setVisible(true);textField3_2.setVisible(true);textField4_2.setVisible(true);textField2.setVisible(true);
                                 textField1_2.setText(comboBox1Selection);textField2_2.setText(comboBox2Selection);
                                 textField3_2.setText(comboBox3Selection);textField4_2.setText(comboBox4Selection);
                                 textField2.setText(String.format("Black-%d \nWhite-%d", black, white));
-                                black = 0;
-                                white = 0;
                                 break;
                         case 2 : textField1_3.setVisible(true);textField2_3.setVisible(true);textField3_3.setVisible(true);textField4_3.setVisible(true);textField3.setVisible(true);
                                 textField1_3.setText(comboBox1Selection);textField2_3.setText(comboBox2Selection);
                                 textField3_3.setText(comboBox3Selection);textField4_3.setText(comboBox4Selection);
                                 textField3.setText(String.format("Black-%d \nWhite-%d", black, white));
-                                black = 0;
-                                white = 0;
                                 break;
                         case 3 : textField1_4.setVisible(true);textField2_4.setVisible(true);textField3_4.setVisible(true);textField4_4.setVisible(true);textField4.setVisible(true);
                                 textField1_4.setText(comboBox1Selection);textField2_4.setText(comboBox2Selection);
                                 textField3_4.setText(comboBox3Selection);textField4_4.setText(comboBox4Selection);
                                 textField4.setText(String.format("Black-%d \nWhite-%d", black, white));
-                                black = 0;
-                                white = 0;
                                 break;
                         case 4 : textField1_5.setVisible(true);textField2_5.setVisible(true);textField3_5.setVisible(true);textField4_5.setVisible(true);textField5.setVisible(true);
                                 textField1_5.setText(comboBox1Selection);textField2_5.setText(comboBox2Selection);
                                 textField3_5.setText(comboBox3Selection);textField4_5.setText(comboBox4Selection);
                                 textField5.setText(String.format("Black-%d \nWhite-%d", black, white));
-                                black = 0;
-                                white = 0;
                                 break;
                         case 5 : textField1_6.setVisible(true);textField2_6.setVisible(true);textField3_6.setVisible(true);textField4_6.setVisible(true);textField6.setVisible(true);
                                 textField1_6.setText(comboBox1Selection);textField2_6.setText(comboBox2Selection);
                                 textField3_6.setText(comboBox3Selection);textField4_6.setText(comboBox4Selection);
                                 textField6.setText(String.format("Black-%d \nWhite-%d", black, white));
-                                black = 0;
-                                white = 0;
                                 break;
                         case 6 : textField1_7.setVisible(true);textField2_7.setVisible(true);textField3_7.setVisible(true);textField4_7.setVisible(true);textField7.setVisible(true);
                                 textField1_7.setText(comboBox1Selection);textField2_7.setText(comboBox2Selection);
                                 textField3_7.setText(comboBox3Selection);textField4_7.setText(comboBox4Selection);
                                 textField7.setText(String.format("Black-%d \nWhite-%d", black, white));
-                                black = 0;
-                                white = 0;
                                 break;
                         case 7 : textField1_8.setVisible(true);textField2_8.setVisible(true);textField3_8.setVisible(true);textField4_8.setVisible(true);textField8.setVisible(true);
                                 textField1_8.setText(comboBox1Selection);textField2_8.setText(comboBox2Selection);
                                 textField3_8.setText(comboBox3Selection);textField4_8.setText(comboBox4Selection);
                                 textField8.setText(String.format("Black-%d \nWhite-%d", black, white));
-                                black = 0;
-                                white = 0;
                                 break;
                         case 8 : textField1_9.setVisible(true);textField2_9.setVisible(true);textField3_9.setVisible(true);textField4_9.setVisible(true);textField9.setVisible(true);
                                 textField1_9.setText(comboBox1Selection);textField2_9.setText(comboBox2Selection);
                                 textField3_9.setText(comboBox3Selection);textField4_9.setText(comboBox4Selection);
                                 textField9.setText(String.format("Black-%d \nWhite-%d", black, white));
-                                black = 0;
-                                white = 0;
                                 break;
                         case 9 : textField1_10.setVisible(true);textField2_10.setVisible(true);textField3_10.setVisible(true);textField4_10.setVisible(true);textField10.setVisible(true);
                                 textField1_10.setText(comboBox1Selection);textField2_10.setText(comboBox2Selection);
                                 textField3_10.setText(comboBox3Selection);textField4_10.setText(comboBox4Selection);
                                 textField10.setText(String.format("Black-%d \nWhite-%d", black, white));
-                                black = 0;
-                                white = 0;
                                 break;
                     }
-                    chances.setText("Chances left: " + (10-count));
+                    chances.setText("Chances to guess left: " + (9-count));
                     count++ ;
+                    if (count>=10) {
+                        chances.setText("You have no chances to guess!");
+                    }
+                    if (black == 4){
+                        chances.setText("You got it!");
+                    }
+                    black = 0;
+                    white = 0;
                     System.out.println(count);
                 }
             });
