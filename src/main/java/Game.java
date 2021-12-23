@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Game extends JFrame {
@@ -67,8 +68,11 @@ public class Game extends JFrame {
     private int count = 0;
     private static int black = 0;
     private static int white = 0;
-    private static ArrayList<String> secret = new ArrayList<>();
-    private static ArrayList<String> selection = new ArrayList<>();
+    private ArrayList<String> secret = new ArrayList<>();
+    private ArrayList<String> secretBack = new ArrayList<>();
+    private ArrayList<String> selection = new ArrayList<>();
+    private HashMap<Integer, String> selectionBack = new HashMap<>();
+    private ArrayList<Integer> selectionIndex = new ArrayList<>();
     private String comboBox1Selection;
     private String comboBox2Selection;
     private String comboBox3Selection;
@@ -95,14 +99,14 @@ public class Game extends JFrame {
         Random rand = new Random();
         String [] maker = new String[]{"red", "blue", "white", "yellow", "pink" , "purple"};
         for (int i = 0; i<4; i++){
-            secret.add(maker[rand.nextInt(maker.length)]);
+            secretBack.add(maker[rand.nextInt(maker.length)]);
+            secret.add(secretBack.get(i));
         }
         selection.add("color");
         selection.add("color");
         selection.add("color");
         selection.add("color");
-
-//        System.out.println(secret);
+        System.out.println(secret);
 
         // --------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -151,19 +155,35 @@ public class Game extends JFrame {
             checkButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                // -------------------------- Logical part for selection comparison --------------------------//
                     for (int i = 0; i<4; i++){
-                        if (secret.get(i).equals(selection.get(i))) black++ ;
+                        if (secret.get(i).equals(selection.get(i))) {
+                            black++ ;
+                            selectionBack.put(i, selection.get(i));
+                            selectionIndex.add(i);
+                            // if got, set item to not accessible by other same items in next session
+                            selection.set(i, "colors");
+                            secret.set(i, "color");
+                        }
                     }
-                    for (int i = 0; i<4; i++){
-                        for (int j=0; j<4; j++){
-                            if(secret.get(i).equals(selection.get(j))) {
+                    for (int j = 0; j<4; j++){
+                        for (int i=0; i<4; i++){
+                            if(i != j && secret.get(i).equals(selection.get(j))) {
                                 white++;
-                                i++ ;
+                                secret.set(i, "color");
                                 break;
                             }
                         }
                     }
+
+                    // reset back all list
+                    if (!selectionBack.isEmpty()){
+                        for (int i = 0; i<selectionIndex.size(); i++){
+                            selection.set(selectionIndex.get(i), selectionBack.get(selectionIndex.get(i)));
+                        }
+                    }
+
+                    // -------------------------- Logical part for selection comparison --------------------------//
 
                     switch (count){
                         case 0 : textField1_1.setVisible(true);textField2_1.setVisible(true);textField3_1.setVisible(true);textField4_1.setVisible(true);textField1.setVisible(true);
@@ -175,6 +195,7 @@ public class Game extends JFrame {
                                 textField1_2.setText(comboBox1Selection);textField2_2.setText(comboBox2Selection);
                                 textField3_2.setText(comboBox3Selection);textField4_2.setText(comboBox4Selection);
                                 textField2.setText(String.format("Black-%d \nWhite-%d", black, white));
+
                                 break;
                         case 2 : textField1_3.setVisible(true);textField2_3.setVisible(true);textField3_3.setVisible(true);textField4_3.setVisible(true);textField3.setVisible(true);
                                 textField1_3.setText(comboBox1Selection);textField2_3.setText(comboBox2Selection);
@@ -227,6 +248,13 @@ public class Game extends JFrame {
                     }
                     black = 0;
                     white = 0;
+                    for (int i = 0; i<4; i++){
+                        secret.set(i, secretBack.get(i));
+                    }
+
+                    System.out.println(selection);
+                    System.out.println(secretBack);
+                    System.out.println(secret);
 //                    System.out.println(count);
                 }
             });
